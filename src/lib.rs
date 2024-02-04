@@ -15,6 +15,8 @@ macro_rules! problem {
                 <($($rest),*)>::bar()
             }
         }
+
+        problem!($($rest),*);
     }
 }
 

@@ -1,0 +1,19 @@
+warning: unnecessary parentheses around type
+  --> src/lib.rs:15:18
+   |
+15 |                 <($($rest),*)>::bar()
+   |                  ^^^     ^^^^
+...
+21 | problem!(T1, T2);
+   | ---------------- in this macro invocation
+   |
+   = note: `#[warn(unused_parens)]` on by default
+   = note: this warning originates in the macro `problem` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: remove these parentheses
+   |
+15 -                 <($($rest),*)>::bar()
+15 +                 <$rest>::bar()
+   |
+
+warning: `playground` (lib) generated 1 warning (run `cargo fix --lib -p playground` to apply 1 suggestion)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s

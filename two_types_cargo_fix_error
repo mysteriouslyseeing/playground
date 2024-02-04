@@ -1,0 +1,46 @@
+    Checking playground v0.0.1 (/home/wschroeder/Projects/playground)
+warning: failed to automatically apply fixes suggested by rustc to crate `playground`
+
+after fixes were automatically applied the compiler reported errors within these files:
+
+  * src/lib.rs
+
+This likely indicates a bug in either rustc or cargo itself,
+and we would appreciate a bug report! You're likely to see
+a number of compiler warnings after this message which cargo
+attempted to fix but failed. If you could open an issue at
+https://github.com/rust-lang/rust/issues
+quoting the full output of this command we'd be very appreciative!
+Note that you may be able to make some more progress in the near-term
+fixing code with the `--broken-code` flag
+
+The following errors were reported:
+error: variable 'rest' is still repeating at this depth
+  --> src/lib.rs:15:18
+   |
+15 |                 <$rest>::bar()
+   |                  ^^^^^
+
+error: aborting due to 1 previous error
+
+Original diagnostics will follow.
+
+warning: unnecessary parentheses around type
+  --> src/lib.rs:15:18
+   |
+15 |                 <($($rest),*)>::bar()
+   |                  ^^^     ^^^^
+...
+21 | problem!(T1, T2);
+   | ---------------- in this macro invocation
+   |
+   = note: `#[warn(unused_parens)]` on by default
+   = note: this warning originates in the macro `problem` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: remove these parentheses
+   |
+15 -                 <($($rest),*)>::bar()
+15 +                 <$rest>::bar()
+   |
+
+warning: `playground` (lib) generated 1 warning (run `cargo fix --lib -p playground` to apply 1 suggestion)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.07s
