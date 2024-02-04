@@ -11,6 +11,7 @@ macro_rules! problem {
     ($ty:ident $(, $rest:ident)*) => {
         impl<$ty: Foo, $($rest: Foo),*> Foo for ($ty, $($rest),*) {
             fn bar() {
+                <$ty>::bar();
                 <($($rest),*)>::bar()
             }
         }
