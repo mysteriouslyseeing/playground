@@ -1,23 +1,6 @@
-trait Foo {
-    fn bar();
+#![no_std]
+
+#[cfg_attr(not(test), panic_handler)]
+pub fn panic_handler(_info: &core::panic::PanicInfo<'_>) -> ! {
+    loop {}
 }
-
-macro_rules! problem {
-    ($ty:ident) => {
-        impl<$ty: Foo> Foo for ($ty,) {
-            fn bar() { <$ty>::bar() }
-        }
-    };
-    ($ty:ident $(, $rest:ident)*) => {
-        impl<$ty: Foo, $($rest: Foo),*> Foo for ($ty, $($rest),*) {
-            fn bar() {
-                <$ty>::bar();
-                <($($rest),*)>::bar()
-            }
-        }
-
-        problem!($($rest),*);
-    }
-}
-
-problem!(T1, T2);
